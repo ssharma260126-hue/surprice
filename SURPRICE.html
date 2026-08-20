@@ -1,0 +1,1401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Happy Raksha Bandhan ❤️</title>
+<meta name="description" content="A Rakhi surprise, made just for my sister.">
+
+<!-- =========================================================
+     FONTS
+========================================================= -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500;1,600&family=Caveat:wght@500;600;700&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+/* =========================================================
+   0. DESIGN TOKENS
+   ---------------------------------------------------------
+   Palette:
+     --cream        #FBF3E7  page background
+     --cream-deep   #F3E4CE  section alt background
+     --maroon       #7A2035  primary accent / headings
+     --maroon-deep  #4E1120  darkest accent, thread
+     --gold         #C9973F  metallic accent, dividers
+     --gold-light   #EFD9A4  glow / highlight
+     --orange       #DE7B4C  warm accent
+     --ink          #402A1E  body text
+   Type:
+     display  -> 'Cormorant Garamond' (elegant serif, section titles)
+     script   -> 'Caveat' (handwritten, emotional lines)
+     body     -> 'Jost' (clean modern, paragraphs / UI)
+========================================================= */
+:root{
+  --cream:#FBF3E7;
+  --cream-deep:#F3E4CE;
+  --maroon:#7A2035;
+  --maroon-deep:#4E1120;
+  --gold:#C9973F;
+  --gold-light:#EFD9A4;
+  --orange:#DE7B4C;
+  --ink:#402A1E;
+  --shadow: 0 20px 60px -20px rgba(78,17,32,0.35);
+}
+
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0;
+  background:var(--cream);
+  color:var(--ink);
+  font-family:'Jost', sans-serif;
+  font-weight:400;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3{
+  font-family:'Cormorant Garamond', serif;
+  margin:0;
+  color:var(--maroon-deep);
+}
+.script{
+  font-family:'Caveat', cursive;
+}
+img{max-width:100%;display:block;}
+button{font-family:inherit;cursor:pointer;}
+a{color:inherit;}
+
+/* focus visibility for accessibility */
+a:focus-visible, button:focus-visible{
+  outline:3px solid var(--orange);
+  outline-offset:3px;
+  border-radius:6px;
+}
+
+@media (prefers-reduced-motion: reduce){
+  *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; scroll-behavior:auto !important;}
+}
+
+/* =========================================================
+   SHARED / UTILITY
+========================================================= */
+.section{
+  position:relative;
+  padding:min(14vw,120px) 6vw;
+  max-width:1180px;
+  margin:0 auto;
+}
+.section-alt{
+  background:var(--cream-deep);
+}
+.section-alt-wrap{ width:100%; }
+.eyebrow{
+  font-family:'Jost',sans-serif;
+  letter-spacing:.35em;
+  text-transform:uppercase;
+  font-size:.68rem;
+  color:var(--orange);
+  font-weight:600;
+  display:block;
+  margin-bottom:14px;
+}
+.section-title{
+  font-size:clamp(2.1rem,5vw,3.4rem);
+  font-weight:600;
+  margin-bottom:.3em;
+}
+.section-sub{
+  font-size:clamp(1.05rem,2vw,1.25rem);
+  color:var(--maroon);
+  max-width:640px;
+  line-height:1.6;
+  font-weight:300;
+}
+.center{text-align:center;margin-left:auto;margin-right:auto;}
+
+#musicBtn {
+    position: fixed;
+    right: 22px;
+    bottom: 22px;
+
+    width: 52px;
+    height: 52px;
+
+    border: 1px solid rgba(201,151,63,.5);
+    border-radius: 50%;
+
+    background: linear-gradient(135deg, var(--maroon), var(--maroon-deep));
+    color: var(--gold-light);
+
+    font-size: 1.3rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+
+    box-shadow: 0 10px 30px rgba(78,17,32,.35);
+
+    z-index: 100000;
+
+    transition: transform .3s ease, box-shadow .3s ease;
+}
+
+#musicBtn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 14px 35px rgba(78,17,32,.5);
+}
+
+#musicBtn:active {
+    transform: scale(.95);
+}
+
+#musicBtn.playing {
+    animation: musicPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes musicPulse {
+    0%, 100% {
+        box-shadow: 0 10px 30px rgba(78,17,32,.35);
+    }
+
+    50% {
+        box-shadow: 0 10px 35px rgba(201,151,63,.7);
+    }
+}
+.btn{
+  border:none;
+  border-radius:999px;
+  padding:16px 38px;
+  font-size:1rem;
+  font-weight:500;
+  letter-spacing:.02em;
+  background:linear-gradient(135deg,var(--maroon),var(--maroon-deep));
+  color:var(--gold-light);
+  box-shadow:0 12px 30px -10px rgba(78,17,32,.55);
+  transition:transform .35s ease, box-shadow .35s ease;
+  position:relative;
+}
+.btn:hover{transform:translateY(-3px) scale(1.03); box-shadow:0 18px 36px -10px rgba(78,17,32,.6);}
+.btn:active{transform:translateY(0) scale(.98);}
+.btn-ghost{
+  background:transparent;
+  border:1.5px solid var(--maroon);
+  color:var(--maroon-deep);
+  box-shadow:none;
+}
+.btn-ghost:hover{background:rgba(122,32,53,.06);}
+
+/* thread divider - the signature motif, a knotted gold thread between sections */
+.thread-divider{
+  width:100%;
+  height:46px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+}
+.thread-divider svg{width:min(220px,60%);height:auto;opacity:.85;}
+
+/* =========================================================
+   1. PARTICLES / AMBIENT LAYER
+========================================================= */
+#particle-layer{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:2;
+  overflow:hidden;
+}
+.particle{
+  position:absolute;
+  top:-40px;
+  will-change:transform,opacity;
+  animation-name:drift;
+  animation-timing-function:linear;
+  animation-iteration-count:infinite;
+  opacity:.75;
+}
+@keyframes drift{
+  0%{transform:translateY(-5vh) translateX(0) rotate(0deg);opacity:0;}
+  8%{opacity:.8;}
+  92%{opacity:.6;}
+  100%{transform:translateY(105vh) translateX(var(--drift-x,40px)) rotate(360deg);opacity:0;}
+}
+
+/* =========================================================
+   2. LANDING / HERO
+========================================================= */
+#landing{
+  min-height:100vh;
+  min-height:100svh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:8vw 6vw;
+  position:relative;
+  background:
+    radial-gradient(circle at 20% 15%, rgba(201,151,63,.18), transparent 55%),
+    radial-gradient(circle at 85% 80%, rgba(122,32,53,.14), transparent 55%),
+    var(--cream);
+  overflow:hidden;
+  z-index:1;
+}
+.hero-kicker{
+  font-family:'Jost',sans-serif;
+  letter-spacing:.4em;
+  text-transform:uppercase;
+  font-size:.72rem;
+  color:var(--maroon);
+  margin-bottom:22px;
+  opacity:.85;
+}
+.hero-title{
+  font-size:clamp(2.4rem,7vw,4.6rem);
+  line-height:1.08;
+  font-weight:600;
+  color:var(--maroon-deep);
+  margin-bottom:20px;
+}
+.hero-sub{
+  font-family:'Caveat',cursive;
+  font-size:clamp(1.4rem,3.4vw,2.1rem);
+  color:var(--maroon);
+  max-width:560px;
+  margin:0 auto 44px;
+  line-height:1.45;
+}
+
+/* animated rakhi thread visual in hero */
+.hero-rakhi{
+  width:min(230px,50vw);
+  height:min(230px,50vw);
+  margin:0 auto 46px;
+  position:relative;
+}
+.hero-rakhi svg{width:100%;height:100%;filter:drop-shadow(0 18px 30px rgba(78,17,32,.28));}
+.rakhi-thread-path{
+  stroke-dasharray:6 10;
+  animation:threadspin 26s linear infinite;
+}
+@keyframes threadspin{to{stroke-dashoffset:-320;}}
+.rakhi-pulse{
+  animation:pulseglow 3.2s ease-in-out infinite;
+  transform-origin:center;
+}
+@keyframes pulseglow{
+  0%,100%{opacity:.55;transform:scale(1);}
+  50%{opacity:1;transform:scale(1.06);}
+}
+
+#openGiftBtn{font-size:1.05rem;padding:18px 44px;}
+
+.hero-scroll-hint{
+  position:absolute;
+  bottom:28px;
+  left:50%;
+  transform:translateX(-50%);
+  font-size:.7rem;
+  letter-spacing:.3em;
+  text-transform:uppercase;
+  color:var(--maroon);
+  opacity:.55;
+  animation:bob 2.4s ease-in-out infinite;
+}
+@keyframes bob{0%,100%{transform:translate(-50%,0);}50%{transform:translate(-50%,8px);}}
+
+/* main site hidden until gift opened */
+#site{
+  opacity:0;
+  transform:translateY(30px);
+  pointer-events:none;
+  transition:opacity 1s ease, transform 1s ease;
+}
+#site.revealed{
+  opacity:1;
+  transform:translateY(0);
+  pointer-events:auto;
+}
+body.gift-opened #landing{
+  display:none;
+}
+
+/* =========================================================
+   3. PERSONAL MESSAGE
+========================================================= */
+#message .letter{
+  background:linear-gradient(180deg,#fff, var(--cream-deep));
+  border:1px solid rgba(201,151,63,.35);
+  border-radius:22px;
+  padding:clamp(28px,6vw,64px);
+  box-shadow:var(--shadow);
+  max-width:760px;
+  margin:0 auto;
+  position:relative;
+}
+#message .letter::before{
+  content:"";
+  position:absolute;
+  top:18px;left:18px;right:18px;bottom:18px;
+  border:1px dashed rgba(122,32,53,.18);
+  border-radius:14px;
+  pointer-events:none;
+}
+#message .letter h3{
+  font-family:'Caveat',cursive;
+  font-size:clamp(1.9rem,4vw,2.6rem);
+  color:var(--maroon);
+  margin-bottom:.6em;
+}
+#message p{
+  font-size:clamp(1rem,2vw,1.15rem);
+  line-height:1.9;
+  color:var(--ink);
+  margin:0 0 1em;
+  opacity:0;
+}
+#message p.revealed{
+  animation:fadeUp .9s ease forwards;
+}
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(14px);}
+  to{opacity:1;transform:translateY(0);}
+}
+#message .sign-off{
+  font-family:'Caveat',cursive;
+  font-size:1.6rem;
+  color:var(--maroon-deep);
+  margin-top:18px;
+}
+
+/* =========================================================
+   4. MEMORY TIMELINE
+========================================================= */
+.timeline{
+  position:relative;
+  margin-top:60px;
+  padding-left:0;
+}
+.timeline::before{
+  content:"";
+  position:absolute;
+  left:50%;
+  top:0;
+  bottom:0;
+  width:2px;
+  background:linear-gradient(180deg, transparent, var(--gold) 8%, var(--gold) 92%, transparent);
+  transform:translateX(-50%);
+}
+.timeline-item{
+  display:flex;
+  justify-content:flex-end;
+  width:100%;
+  padding:0 0 70px;
+  position:relative;
+}
+.timeline-item:last-child{padding-bottom:0;}
+.timeline-item .tl-card{
+  width:calc(50% - 46px);
+  opacity:0;
+  transform:translateY(30px);
+  transition:opacity .8s ease, transform .8s ease;
+}
+.timeline-item.in-view .tl-card{opacity:1;transform:translateY(0);}
+.timeline-item:nth-child(even){justify-content:flex-start;}
+.timeline-dot{
+  position:absolute;
+  left:50%;
+  top:8px;
+  transform:translateX(-50%);
+  width:16px;height:16px;
+  border-radius:50%;
+  background:var(--gold);
+  border:3px solid var(--cream);
+  box-shadow:0 0 0 2px var(--gold);
+  z-index:1;
+}
+.tl-card{
+  background:#fff;
+  border-radius:18px;
+  overflow:hidden;
+  box-shadow:0 14px 34px -16px rgba(78,17,32,.3);
+  border:1px solid rgba(201,151,63,.25);
+}
+.tl-card .tl-img{
+  width:100%;
+  aspect-ratio:4/3;
+  object-fit:cover;
+  background:var(--cream-deep);
+}
+.tl-body{padding:18px 22px 22px;}
+.tl-date{
+  font-size:.72rem;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:var(--orange);
+  font-weight:600;
+}
+.tl-caption{
+  font-family:'Caveat',cursive;
+  font-size:1.35rem;
+  color:var(--maroon-deep);
+  margin-top:6px;
+}
+
+@media (max-width:760px){
+  .timeline::before{left:22px;}
+  .timeline-item, .timeline-item:nth-child(even){justify-content:flex-start;padding-left:50px;}
+  .timeline-item .tl-card{width:100%;}
+  .timeline-dot{left:22px;}
+}
+
+/* =========================================================
+   5. GALLERY
+========================================================= */
+.masonry{
+  column-count:3;
+  column-gap:18px;
+  margin-top:50px;
+}
+@media (max-width:900px){.masonry{column-count:2;}}
+@media (max-width:520px){.masonry{column-count:1;}}
+.gal-item{
+  break-inside:avoid;
+  margin-bottom:18px;
+  border-radius:16px;
+  overflow:hidden;
+  position:relative;
+  cursor:pointer;
+  box-shadow:0 10px 26px -14px rgba(78,17,32,.35);
+  background:var(--cream-deep);
+}
+.gal-item img{
+  width:100%;
+  display:block;
+  transition:transform .6s ease;
+}
+.gal-item:hover img{transform:scale(1.07);}
+.gal-caption{
+  position:absolute;
+  left:0;right:0;bottom:0;
+  padding:14px 16px;
+  font-family:'Caveat',cursive;
+  font-size:1.15rem;
+  color:#fff;
+  background:linear-gradient(0deg, rgba(78,17,32,.75), transparent);
+  opacity:0;
+  transform:translateY(8px);
+  transition:opacity .4s ease, transform .4s ease;
+}
+.gal-item:hover .gal-caption{opacity:1;transform:translateY(0);}
+
+/* lightbox */
+/* lightbox */
+#gallery {
+    position: relative;
+}
+
+#lightbox {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    background: rgba(30, 10, 16, 0.92);
+
+    display: none;
+    align-items: center;
+    justify-content: center;
+
+    z-index: 9999;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+#lightbox.open {
+    display: flex;
+}
+
+#lightbox figure {
+    max-width: 90vw;
+    max-height: 90vh;
+    margin: 0;
+    text-align: center;
+    transform: translateY(1600px);
+}
+
+#lightbox img {
+    max-width: 85vw;
+    max-height: 80vh;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+
+    border-radius: 14px;
+    margin: 0 auto;
+    box-shadow: 0 30px 70px rgba(0, 0, 0, 0.5);
+}
+
+#lightbox figcaption {
+    font-family: 'Caveat', cursive;
+    color: var(--gold-light);
+    font-size: 1.4rem;
+    margin-top: 16px;
+}
+
+/* Previous / Next buttons */
+.lb-btn {
+    position: absolute;
+    top: calc(50% + 1600px);
+    transform: translateY(-50%);
+
+    background: rgba(255, 255, 255, 0.12);
+    border: none;
+    color: #fff;
+
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+
+    font-size: 1.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    transition: background 0.3s ease;
+}
+
+.lb-btn:hover {
+    background: rgba(255, 255, 255, 0.25);
+}
+
+#lbPrev {
+    left: 2vw;
+}
+
+#lbNext {
+    right: 2vw;
+}
+
+/* Close button */
+#lbClose {
+    position: absolute;
+    top: 24px;
+    right: 24px;
+
+    background: transparent;
+    border: none;
+    color: #fff;
+
+    font-size: 1.8rem;
+    width: 44px;
+    height: 44px;
+
+    cursor: pointer;
+}
+
+/* =========================================================
+   6. RAKHI TIE INTERACTIVE
+========================================================= */
+#rakhi-tie{text-align:center;}
+.tie-stage{
+  max-width:520px;
+  margin:50px auto 20px;
+  position:relative;
+}
+.tie-stage svg{width:100%;height:auto;}
+.tie-strand-left, .tie-strand-right{
+  transition:transform 1.4s cubic-bezier(.6,.05,.3,1);
+}
+.tied .tie-strand-left{transform:translateX(38px) rotate(10deg);}
+.tied .tie-strand-right{transform:translateX(-38px) rotate(-10deg);}
+.tie-knot{
+  opacity:0;
+  transform:scale(.3);
+  transform-origin:center;
+  transition:opacity .6s ease .9s, transform .6s cubic-bezier(.34,1.56,.64,1) .9s;
+}
+.tied .tie-knot{opacity:1;transform:scale(1);}
+.tie-line{
+  font-family:'Caveat',cursive;
+  font-size:clamp(1.5rem,3.4vw,2rem);
+  color:var(--maroon-deep);
+  margin-top:26px;
+  min-height:2.4em;
+  opacity:0;
+  transition:opacity .8s ease;
+}
+.tie-line.show{opacity:1;}
+
+/* golden burst particles for rakhi + secret message */
+.burst-particle{
+  position:fixed;
+  width:8px;height:8px;
+  border-radius:50%;
+  background:var(--gold);
+  pointer-events:none;
+  z-index:60;
+  animation:burstOut 1.1s ease-out forwards;
+}
+@keyframes burstOut{
+  to{
+    transform:translate(var(--bx), var(--by)) scale(0);
+    opacity:0;
+  }
+}
+
+/* =========================================================
+   7. FUNNY SECTION
+========================================================= */
+.funny-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+  gap:18px;
+  margin-top:50px;
+}
+.funny-card{
+  background:#fff;
+  border:1px solid rgba(201,151,63,.3);
+  border-radius:18px;
+  padding:26px 22px;
+  font-size:1.02rem;
+  line-height:1.55;
+  color:var(--ink);
+  box-shadow:0 10px 26px -16px rgba(78,17,32,.28);
+  transition:transform .4s ease, box-shadow .4s ease;
+  position:relative;
+  opacity:0;
+  transform:translateY(24px);
+}
+.funny-card.in-view{opacity:1;transform:translateY(0);transition:opacity .7s ease, transform .7s ease;}
+.funny-card:hover{transform:translateY(-6px);box-shadow:0 18px 34px -16px rgba(78,17,32,.34);}
+.funny-num{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.6rem;
+  color:var(--gold);
+  font-weight:600;
+  display:block;
+  margin-bottom:8px;
+}
+
+/* =========================================================
+   8. SECRET MESSAGE
+========================================================= */
+#secret{text-align:center;}
+#secretBtn{margin-top:10px;}
+#secretReveal{
+  max-width:620px;
+  margin:38px auto 0;
+  background:linear-gradient(180deg,#fff,var(--cream-deep));
+  border:1px solid rgba(201,151,63,.35);
+  border-radius:22px;
+  padding:clamp(26px,5vw,52px);
+  box-shadow:var(--shadow);
+  display:none;
+  opacity:0;
+  transform:scale(.94);
+}
+#secretReveal.show{
+  display:block;
+  animation:secretIn .7s cubic-bezier(.34,1.56,.64,1) forwards;
+}
+@keyframes secretIn{to{opacity:1;transform:scale(1);}}
+#secretReveal p{
+  font-family:'Caveat',cursive;
+  font-size:clamp(1.4rem,3.2vw,1.8rem);
+  color:var(--maroon-deep);
+  line-height:1.6;
+  margin:0 0 .6em;
+}
+.heart-float{
+  position:absolute;
+  font-size:1.4rem;
+  animation:heartUp 2.4s ease-out forwards;
+  pointer-events:none;
+}
+@keyframes heartUp{
+  0%{transform:translateY(0) scale(.6);opacity:0;}
+  15%{opacity:1;}
+  100%{transform:translateY(-160px) scale(1.2);opacity:0;}
+}
+
+/* =========================================================
+   9. FINAL SECTION
+========================================================= */
+#final{
+  text-align:center;
+  background:
+    radial-gradient(circle at 30% 20%, rgba(201,151,63,.22), transparent 55%),
+    radial-gradient(circle at 75% 75%, rgba(122,32,53,.18), transparent 55%),
+    var(--cream-deep);
+  padding-bottom:min(16vw,150px);
+}
+#final .final-title{
+  font-size:clamp(2.3rem,6vw,3.8rem);
+}
+#final .final-quote{
+  font-family:'Caveat',cursive;
+  font-size:clamp(1.4rem,3.4vw,2rem);
+  color:var(--maroon);
+  max-width:600px;
+  margin:26px auto 0;
+  line-height:1.6;
+}
+#final .final-signoff{
+  margin-top:34px;
+  font-family:'Cormorant Garamond',serif;
+  font-style:italic;
+  font-size:1.3rem;
+  color:var(--maroon-deep);
+}
+.final-rakhi-glow{
+  width:120px;height:120px;
+  margin:44px auto 0;
+  position:relative;
+}
+.final-rakhi-glow svg{width:100%;height:100%;}
+.final-decor{
+  margin-top:28px;
+  font-size:1.6rem;
+  letter-spacing:.4em;
+  opacity:.8;
+}
+#confetti-canvas{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:55;
+}
+
+/* footer note for the brother, not shown to sister emotionally but kept subtle */
+.credit{
+  text-align:center;
+  font-size:.75rem;
+  letter-spacing:.1em;
+  color:var(--maroon);
+  opacity:.5;
+  padding:28px 6vw 40px;
+}
+
+/* placeholder badge shown on placeholder images so brother knows to replace them */
+.ph-badge{
+  position:absolute;
+  top:8px;right:8px;
+  background:rgba(78,17,32,.75);
+  color:var(--gold-light);
+  font-size:.62rem;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  padding:4px 8px;
+  border-radius:999px;
+  z-index:2;
+  pointer-events:none;
+}
+</style>
+</head>
+<body>
+
+   <audio id="bgMusic"></audio>
+
+<button id="musicBtn" aria-label="Play or pause music" title="Music">
+    🎵
+</button>
+
+
+<!-- =========================================================
+     AMBIENT PARTICLE LAYER (hearts / sparkles / petals)
+========================================================= -->
+<div id="particle-layer" aria-hidden="true"></div>
+
+<!-- =========================================================
+     LANDING SCREEN
+========================================================= -->
+<section id="landing">
+  <span class="hero-kicker">Raksha Bandhan</span>
+  <h1 class="hero-title">Happy Raksha Bandhan ❤️</h1>
+  <p class="hero-sub" id="heroLine2">To the sister who became one of the most beautiful parts of my life...</p>
+
+  <div class="hero-rakhi" aria-hidden="true">
+    <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle class="rakhi-pulse" cx="100" cy="100" r="70" stroke="#C9973F" stroke-width="1" opacity=".5"/>
+      <path class="rakhi-thread-path" d="M30,100 C30,55 70,30 100,30 C130,30 170,55 170,100 C170,145 130,170 100,170 C70,170 30,145 30,100 Z"
+            stroke="#7A2035" stroke-width="2.2" fill="none"/>
+      <circle cx="100" cy="100" r="26" fill="#C9973F"/>
+      <circle cx="100" cy="100" r="26" fill="url(#goldGrad)"/>
+      <circle cx="100" cy="100" r="14" fill="#FBF3E7"/>
+      <path d="M100,86 l4,8 9,1 -6.5,6.3 1.5,9 -8,-4.3 -8,4.3 1.5,-9 -6.5,-6.3 9,-1 z" fill="#7A2035"/>
+      <defs>
+        <radialGradient id="goldGrad" cx="0.35" cy="0.3" r="0.9">
+          <stop offset="0%" stop-color="#F0D28C"/>
+          <stop offset="100%" stop-color="#C9973F"/>
+        </radialGradient>
+      </defs>
+    </svg>
+  </div>
+
+  <button class="btn" id="openGiftBtn">Open Your Surprise,BHN jii 🎁</button>
+  <span class="hero-scroll-hint">Made with love</span>
+</section>
+
+<!-- =========================================================
+     MAIN SITE (revealed after gift opens)
+========================================================= -->
+<div id="site">
+
+  <!-- 2. PERSONAL MESSAGE -->
+  <section class="section" id="message">
+    <div class="letter">
+      <h3 class="script">Dear Sister ❤️</h3>
+      <div id="letterText"></div>
+      <p class="sign-off">— Your Brother</p>
+    </div>
+  </section>
+
+  <div class="thread-divider" aria-hidden="true">
+    <svg viewBox="0 0 220 20"><path d="M0,10 Q55,-4 110,10 T220,10" stroke="#C9973F" stroke-width="1.4" fill="none"/></svg>
+  </div>
+
+  <!-- 3. MEMORY TIMELINE -->
+  <section class="section" id="timeline-section">
+    <span class="eyebrow center">Our Story</span>
+    <h2 class="section-title center">Our Little Journey ✨</h2>
+    <p class="section-sub center">A few moments, out of hundreds, that I'll never forget.</p>
+    <div class="timeline" id="timelineList"></div>
+  </section>
+
+  <div class="thread-divider" aria-hidden="true">
+    <svg viewBox="0 0 220 20"><path d="M0,10 Q55,24 110,10 T220,10" stroke="#C9973F" stroke-width="1.4" fill="none"/></svg>
+  </div>
+
+  <!-- 4. GALLERY -->
+  <section class="section section-alt-wrap" id="gallery-section">
+    <div class="section-alt" style="border-radius:32px;padding:min(10vw,80px) min(6vw,60px);">
+      <span class="eyebrow center">Gallery</span>
+      <h2 class="section-title center">Moments I'll Always Keep ❤️</h2>
+      <p class="section-sub center">Click any photo to see it up close.</p>
+      <div class="masonry" id="galleryGrid"></div>
+    </div>
+  </section>
+
+  <!-- lightbox -->
+  <div id="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer">
+    <button class="lb-btn" id="lbPrev" aria-label="Previous photo">‹</button>
+    <figure>
+      <img id="lbImg" src="" alt="">
+      <figcaption id="lbCaption"></figcaption>
+    </figure>
+    <button class="lb-btn" id="lbNext" aria-label="Next photo">›</button>
+    <button id="lbClose" aria-label="Close photo viewer">×</button>
+  </div>
+
+  <div class="thread-divider" aria-hidden="true">
+    <svg viewBox="0 0 220 20"><path d="M0,10 Q55,-4 110,10 T220,10" stroke="#C9973F" stroke-width="1.4" fill="none"/></svg>
+  </div>
+
+  <!-- 5. RAKHI TIE -->
+  <section class="section" id="rakhi-tie">
+    <span class="eyebrow center">The Thread🪢</span>
+    <h2 class="section-title center">A Thread That Connects Us Forever 🧿</h2>
+    <p class="section-sub center" style="margin-left:auto;margin-right:auto;">However far apart we are, this never breaks.</p>
+
+    <div class="tie-stage" id="tieStage">
+      <svg viewBox="0 0 400 160" aria-hidden="true">
+        <g class="tie-strand-left">
+          <path d="M20,80 C60,40 100,40 150,80" stroke="#7A2035" stroke-width="3" fill="none" stroke-linecap="round"/>
+        </g>
+        <g class="tie-strand-right">
+          <path d="M250,80 C300,40 340,40 380,80" stroke="#7A2035" stroke-width="3" fill="none" stroke-linecap="round"/>
+        </g>
+        <g class="tie-knot">
+          <circle cx="200" cy="80" r="30" fill="url(#knotGrad)"/>
+          <circle cx="200" cy="80" r="30" fill="none" stroke="#7A2035" stroke-width="1.5"/>
+          <path d="M200,64 l4.5,9 10,1 -7.3,7 1.7,10 -9,-4.8 -9,4.8 1.7,-10 -7.3,-7 10,-1 z" fill="#7A2035"/>
+        </g>
+        <defs>
+          <radialGradient id="knotGrad" cx="0.35" cy="0.3" r="0.9">
+            <stop offset="0%" stop-color="#F0D28C"/>
+            <stop offset="100%" stop-color="#C9973F"/>
+          </radialGradient>
+        </defs>
+      </svg>
+    </div>
+
+    <button class="btn" id="tieBtn">Tie the Rakhi 🥰❤️</button>
+    <p class="tie-line script" id="tieLine">Distance can never untie a bond like ours🧿. (Bas paise bhejte rhna😁)</p>
+  </section>
+
+  <div class="thread-divider" aria-hidden="true">
+    <svg viewBox="0 0 220 20"><path d="M0,10 Q55,24 110,10 T220,10" stroke="#C9973F" stroke-width="1.4" fill="none"/></svg>
+  </div>
+
+  <!-- 6. FUNNY SECTION -->
+  <section class="section section-alt-wrap">
+    <div class="section-alt" style="border-radius:32px;padding:min(10vw,80px) min(6vw,60px);">
+      <span class="eyebrow center">Only You, Sis🎀</span>
+      <h2 class="section-title center">What Makes Us “Us” ❤️</h2>
+      <div class="funny-grid" id="funnyGrid"></div>
+    </div>
+  </section>
+
+  <div class="thread-divider" aria-hidden="true">
+    <svg viewBox="0 0 220 20"><path d="M0,10 Q55,-4 110,10 T220,10" stroke="#C9973F" stroke-width="1.4" fill="none"/></svg>
+  </div>
+
+  <!-- 7. SECRET MESSAGE -->
+  <section class="section" id="secret">
+    <button class="btn btn-ghost" id="secretBtn">There's one more thing... 👀😌</button>
+    <div id="secretReveal">
+      <p>Whatever life brings, wherever we go, and however much things change...</p>
+      <p>I'll always be your brother.</p>
+      <p>And you'll always have someone standing beside you.🫡</p>
+      <p style="margin-top:1em;">Happy Raksha Bandhan, BHN jii ❤️</p>
+    </div>
+  </section>
+
+  <!-- 8. FINAL SECTION -->
+  <section class="section" id="final">
+    <h2 class="final-title script" id="finalTitle">Happy Raksha Bandhan, Deepika ❤️</h2>
+    <p class="final-quote">Some bonds are not measured by distance, time, or words.<br>They're simply felt.<br>And ours is one of them.</p>
+    <p class="final-signoff" id="finalSignoff">— Baauji</p>
+
+    <div class="final-rakhi-glow" aria-hidden="true">
+      <svg viewBox="0 0 200 200">
+        <circle class="rakhi-pulse" cx="100" cy="100" r="60" fill="none" stroke="#C9973F" stroke-width="1.5"/>
+        <circle cx="100" cy="100" r="24" fill="url(#finalGrad)"/>
+        <path d="M100,88 l3.5,7 8,.8 -5.8,5.5 1.4,8 -7.1,-3.8 -7.1,3.8 1.4,-8 -5.8,-5.5 8,-.8 z" fill="#7A2035"/>
+        <defs>
+          <radialGradient id="finalGrad" cx="0.35" cy="0.3" r="0.9">
+            <stop offset="0%" stop-color="#F0D28C"/>
+            <stop offset="100%" stop-color="#C9973F"/>
+          </radialGradient>
+        </defs>
+      </svg>
+    </div>
+    <div class="final-decor" aria-hidden="true">✿ ❤ ✿</div>
+  </section>
+
+  <p class="credit">made with love, for you ❤️</p>
+</div>
+
+<canvas id="confetti-canvas" aria-hidden="true"></canvas>
+
+<script>
+/* =========================================================
+   ⭐ EASY PERSONALIZATION — EDIT THIS SECTION ONLY ⭐
+   ---------------------------------------------------------
+   Change the names, memories, and photos here.
+   For every "img" field below:
+     - Leave it as null to keep a pretty placeholder, OR
+     - Replace it with a photo path, e.g. "photos/rakhi1.jpg"
+       (put your photo files in a "photos" folder next to
+       this index.html file, then reference them here).
+========================================================= */
+const sisterName  = "sister";
+const brotherName = "Baauji";
+
+// Timeline memories — shown in "Our Little Journey"
+const memories = [
+  { img: "rakhipic/sister0.jpeg", date: "Day Zero", caption: "We had no idea this random moment would be the beginning of our bond.🥹"},
+  { img: "rakhipic/sister1.jpg", date: "The Beginning", caption: "Where it all began ❤️" },
+  { img: "rakhipic/sister2.jpg", date: "Growing Up", caption: "Some memories never fade." },
+  { img: "rakhipic/sister3.jpg", date: "Always Together", caption: "Partners in crime 😂" },
+  { img: "rakhipic/sister4.jpg", date: "Late Nights", caption: "Endless conversations." },
+  { img: "rakhipic/sister5.jpg", date: "Sibling Life", caption: "Fights that lasted 5 minutes." },
+  { img: "rakhipic/sister6.jpg", date: "Every Year", caption: "Memories that will last forever." },
+  { img: "rakhipic/sister7.jpg", date: "Even Now", caption: "Still my favourite person to annoy." },
+  { img: "rakhipic/sister8.jpg", date: "In Every Universe", caption: "In every universe, save me a place beside you." }
+];
+
+// Gallery photos — shown in "Moments I'll Always Keep"
+const galleryImages = [
+  { img: "rakhipic/sister9.jpg", caption: "One of my favourites." },
+  { img: "rakhipic/sister10.jpg", caption: "That day we couldn't stop laughing." },
+  { img: "rakhipic/sister11.jpg", caption: "Just us." },
+  { img: "rakhipic/sister12.jpeg", caption: "A memory worth keeping." },
+  { img: "rakhipic/sister13.jpg", caption: "Best of friends, forever siblings." },
+  { img: "rakhipic/sister14.jpg", caption: "This one says it all." }
+];
+
+/* ========================================================= */
+
+// apply names wherever they appear
+document.getElementById('heroLine2').innerHTML =
+  `To the ${sisterName === "Sister" ? "sister" : sisterName} who became one of the most beautiful parts of my life...`;
+document.getElementById('finalSignoff').textContent = `— ${brotherName}`;
+
+// ---------------------------------------------------------
+// Placeholder image generator (pretty inline SVG, no external files needed)
+// ---------------------------------------------------------
+function placeholderSrc(label){
+  const svg = `
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+    <defs>
+      <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#F3E4CE"/>
+        <stop offset="100%" stop-color="#E9CBA6"/>
+      </linearGradient>
+    </defs>
+    <rect width="400" height="300" fill="url(#g)"/>
+    <g fill="#7A2035" opacity="0.55">
+      <circle cx="200" cy="118" r="30" fill="none" stroke="#7A2035" stroke-width="3"/>
+      <path d="M186,118 a14,14 0 1,1 28,0 a14,10 0 0,1 -28,0 z" fill="#7A2035" opacity="0.7"/>
+    </g>
+    <text x="200" y="188" font-family="Jost, sans-serif" font-size="14" fill="#7A2035" text-anchor="middle" opacity="0.75">Add your photo</text>
+    <text x="200" y="210" font-family="Jost, sans-serif" font-size="11" fill="#7A2035" text-anchor="middle" opacity="0.55">${label}</text>
+  </svg>`;
+  return "data:image/svg+xml;utf8," + encodeURIComponent(svg);
+}
+
+// ---------------------------------------------------------
+// Build Timeline
+// ---------------------------------------------------------
+const timelineList = document.getElementById('timelineList');
+memories.forEach((m,i) => {
+  const item = document.createElement('div');
+  item.className = 'timeline-item';
+  item.innerHTML = `
+    <span class="timeline-dot" aria-hidden="true"></span>
+    <div class="tl-card">
+      <img class="tl-img" src="${m.img || placeholderSrc('Timeline photo ' + (i+1))}" alt="${m.caption}">
+      <div class="tl-body">
+        <span class="tl-date">${m.date}</span>
+        <p class="tl-caption">${m.caption}</p>
+      </div>
+    </div>`;
+  timelineList.appendChild(item);
+});
+
+// ---------------------------------------------------------
+// Build Gallery
+// ---------------------------------------------------------
+const galleryGrid = document.getElementById('galleryGrid');
+galleryImages.forEach((g,i) => {
+  const el = document.createElement('div');
+  el.className = 'gal-item';
+  el.tabIndex = 0;
+  el.setAttribute('role','button');
+  el.setAttribute('aria-label','Open photo: ' + g.caption);
+  el.innerHTML = `
+    <img src="${g.img || placeholderSrc('Gallery photo ' + (i+1))}" alt="${g.caption}" loading="lazy">
+    <div class="gal-caption">${g.caption}</div>`;
+  el.addEventListener('click', () => openLightbox(i));
+  el.addEventListener('keypress', e => { if(e.key === 'Enter') openLightbox(i); });
+  galleryGrid.appendChild(el);
+});
+
+// lightbox logic
+let lbIndex = 0;
+const lightbox = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCaption = document.getElementById('lbCaption');
+function openLightbox(i){
+  lbIndex = i;
+  updateLightbox();
+  lightbox.classList.add('open');
+}
+function updateLightbox(){
+  const g = galleryImages[lbIndex];
+  lbImg.src = g.img || placeholderSrc('Gallery photo ' + (lbIndex+1));
+  lbImg.alt = g.caption;
+  lbCaption.textContent = g.caption;
+}
+document.getElementById('lbClose').addEventListener('click', () => lightbox.classList.remove('open'));
+document.getElementById('lbNext').addEventListener('click', () => { lbIndex = (lbIndex+1) % galleryImages.length; updateLightbox(); });
+document.getElementById('lbPrev').addEventListener('click', () => { lbIndex = (lbIndex-1+galleryImages.length) % galleryImages.length; updateLightbox(); });
+lightbox.addEventListener('click', e => { if(e.target === lightbox) lightbox.classList.remove('open'); });
+document.addEventListener('keydown', e => {
+  if(!lightbox.classList.contains('open')) return;
+  if(e.key === 'Escape') lightbox.classList.remove('open');
+  if(e.key === 'ArrowRight') document.getElementById('lbNext').click();
+  if(e.key === 'ArrowLeft') document.getElementById('lbPrev').click();
+});
+
+// ---------------------------------------------------------
+// Personal letter — fade/typewriter-style paragraph reveal
+// ---------------------------------------------------------
+const letterLines = [
+  "Another Rakhi, another beautiful reminder of the bond we share.",
+  "Maybe one day we'll both be busy with our own lives, living in different places and making new memories. But I hope we'll always look back at these days and smile at how our bond started and how far it came.",
+  `You will always be my ${sisterName === "Sister" ? "sister" : sisterName.toLowerCase()}, my little piece of home, and someone I will always care about.`,
+  "This Rakhi, I just want you to know that your brother hasn't forgotten a single moment, a single memory, or the day our bond began.",
+  "Happy Raksha Bandhan, Deepika. ❤️"
+];
+const letterText = document.getElementById('letterText');
+letterLines.forEach(line => {
+  const p = document.createElement('p');
+  p.textContent = line;
+  letterText.appendChild(p);
+});
+
+// ---------------------------------------------------------
+// Funny cards
+// ---------------------------------------------------------
+const funnyLines = [
+  "Came into my life as a stranger, stayed as family.💕",
+  "No shared DNA, just an unreasonable amount of attachment.🪢",
+  "Started as a friendship, somehow became a sisterhood.🧿",
+  "Different families, same level of madness.😎",
+  "Not my sister by blood, but definitely by heart.❤️",
+  "Still be the person I would defend against anyone.🫶"
+];
+const funnyGrid = document.getElementById('funnyGrid');
+funnyLines.forEach((line,i) => {
+  const card = document.createElement('div');
+  card.className = 'funny-card';
+  card.innerHTML = `<span class="funny-num">0${i+1}</span>${line}`;
+  funnyGrid.appendChild(card);
+});
+
+// ---------------------------------------------------------
+// Ambient particles (hearts / sparkles / petals)
+// ---------------------------------------------------------
+const particleLayer = document.getElementById('particle-layer');
+const particleGlyphs = ['❤','✿','✦','❀','·'];
+function spawnAmbientParticle(){
+  const el = document.createElement('span');
+  el.className = 'particle';
+  el.textContent = particleGlyphs[Math.floor(Math.random()*particleGlyphs.length)];
+  const size = 10 + Math.random()*16;
+  el.style.left = Math.random()*100 + 'vw';
+  el.style.fontSize = size + 'px';
+  el.style.color = Math.random() > 0.5 ? 'rgba(122,32,53,.45)' : 'rgba(201,151,63,.6)';
+  el.style.setProperty('--drift-x', (Math.random()*80-40) + 'px');
+  el.style.animationDuration = (10 + Math.random()*8) + 's';
+  particleLayer.appendChild(el);
+  setTimeout(() => el.remove(), 19000);
+}
+let ambientInterval = null;
+function startAmbient(){
+  if(ambientInterval) return;
+  for(let i=0;i<5;i++) setTimeout(spawnAmbientParticle, i*700);
+  ambientInterval = setInterval(spawnAmbientParticle, 1400);
+}
+
+// burst particle helper (used by rakhi tie + secret message)
+function burst(x, y, count = 24, color = null){
+  for(let i=0;i<count;i++){
+    const p = document.createElement('span');
+    p.className = 'burst-particle';
+    const angle = Math.random()*Math.PI*2;
+    const dist = 60 + Math.random()*90;
+    p.style.left = x + 'px';
+    p.style.top = y + 'px';
+    p.style.setProperty('--bx', Math.cos(angle)*dist + 'px');
+    p.style.setProperty('--by', Math.sin(angle)*dist + 'px');
+    if(color) p.style.background = color;
+    document.body.appendChild(p);
+    setTimeout(() => p.remove(), 1200);
+  }
+}
+
+// ---------------------------------------------------------
+// Landing → open gift
+// ---------------------------------------------------------
+const openGiftBtn = document.getElementById('openGiftBtn');
+const siteEl = document.getElementById('site');
+const bgMusic = document.getElementById('bgMusic');
+const musicBtn = document.getElementById('musicBtn');
+
+const musicPlaylist = [
+    "music/song1.mp3",
+    "music/song2.mp3",
+    "music/song3.mp3",
+    "music/song4.mp3",
+    "music/song5.mp3",
+    "music/song6.mp3",
+    "music/song7.mp3",
+    "music/song8.mp3",
+    "music/song9.mp3",
+    "music/song10.mp3",
+    "music/song11.mp3",
+    "music/song12.mp3"
+    
+];
+
+let shuffledPlaylist = [];
+let currentSong = 0;
+
+function shufflePlaylist() {
+    shuffledPlaylist = [...musicPlaylist];
+
+    for (let i = shuffledPlaylist.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+
+        [shuffledPlaylist[i], shuffledPlaylist[j]] =
+        [shuffledPlaylist[j], shuffledPlaylist[i]];
+    }
+
+    currentSong = 0;
+}
+
+function playCurrentSong() {
+    bgMusic.src = shuffledPlaylist[currentSong];
+    bgMusic.volume = 0.80;
+
+    bgMusic.play();
+
+    musicBtn.textContent = '🎵';
+    musicBtn.classList.add('playing');
+}
+
+bgMusic.addEventListener('ended', () => {
+    currentSong++;
+
+    if (currentSong >= shuffledPlaylist.length) {
+        shufflePlaylist();
+    }
+
+    playCurrentSong();
+});
+
+openGiftBtn.addEventListener('click', () => {
+
+   shufflePlaylist();
+playCurrentSong();
+
+  const rect = openGiftBtn.getBoundingClientRect();
+  burst(rect.left + rect.width/2, rect.top + rect.height/2, 34);
+  document.body.classList.add('gift-opened');
+  siteEl.classList.add('revealed');
+  startAmbient();
+  // reveal letter paragraphs with staggered fade
+  document.querySelectorAll('#letterText p').forEach((p,i) => {
+    setTimeout(() => p.classList.add('revealed'), 400 + i*550);
+  });
+  setTimeout(() => siteEl.scrollIntoView({behavior:'smooth'}), 250);
+});
+
+musicBtn.addEventListener('click', () => {
+
+    if (bgMusic.paused) {
+        bgMusic.play();
+        musicBtn.textContent = '🎵';
+        musicBtn.classList.add('playing');
+    } else {
+        bgMusic.pause();
+        musicBtn.textContent = '🔇';
+        musicBtn.classList.remove('playing');
+    }
+
+});
+
+// ---------------------------------------------------------
+// Scroll reveal (timeline + funny cards)
+// ---------------------------------------------------------
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting){
+      entry.target.classList.add('in-view');
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, {threshold:0.2});
+document.querySelectorAll('.timeline-item, .funny-card').forEach(el => revealObserver.observe(el));
+
+// ---------------------------------------------------------
+// Rakhi tie interaction
+// ---------------------------------------------------------
+const tieStage = document.getElementById('tieStage');
+const tieBtn = document.getElementById('tieBtn');
+const tieLine = document.getElementById('tieLine');
+tieBtn.addEventListener('click', () => {
+  if(tieStage.classList.contains('tied')) return;
+  tieStage.classList.add('tied');
+  tieBtn.textContent = 'Tied with love 🥰';
+  tieBtn.disabled = true;
+  setTimeout(() => {
+    const rect = tieStage.getBoundingClientRect();
+    burst(rect.left + rect.width/2, rect.top + rect.height/2, 30);
+    tieLine.classList.add('show');
+  }, 950);
+});
+
+// ---------------------------------------------------------
+// Secret message reveal
+// ---------------------------------------------------------
+const secretBtn = document.getElementById('secretBtn');
+const secretReveal = document.getElementById('secretReveal');
+secretBtn.addEventListener('click', () => {
+  const isOpen = secretReveal.classList.toggle('show');
+  secretBtn.textContent = isOpen ? 'Close ✨' : "There's one more thing... 👀";
+  if(isOpen){
+    const rect = secretBtn.getBoundingClientRect();
+    for(let i=0;i<10;i++){
+      setTimeout(() => {
+        const h = document.createElement('span');
+        h.className = 'heart-float';
+        h.textContent = '❤';
+        h.style.left = (rect.left + rect.width/2 + (Math.random()*80-40)) + 'px';
+        h.style.top = rect.top + 'px';
+        document.body.appendChild(h);
+        setTimeout(() => h.remove(), 2500);
+      }, i*90);
+    }
+    setTimeout(() => secretReveal.scrollIntoView({behavior:'smooth', block:'center'}), 150);
+  }
+});
+
+// ---------------------------------------------------------
+// Final section confetti (triggered when it scrolls into view)
+// ---------------------------------------------------------
+const canvas = document.getElementById('confetti-canvas');
+const ctx = canvas.getContext('2d');
+function resizeCanvas(){ canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+resizeCanvas();
+window.addEventListener('resize', resizeCanvas);
+
+let confettiPieces = [];
+const confettiColors = ['#C9973F','#7A2035','#DE7B4C','#F0D28C'];
+function launchConfetti(){
+  confettiPieces = [];
+  for(let i=0;i<90;i++){
+    confettiPieces.push({
+      x: Math.random()*canvas.width,
+      y: -20 - Math.random()*canvas.height*0.4,
+      r: 4 + Math.random()*5,
+      c: confettiColors[Math.floor(Math.random()*confettiColors.length)],
+      vy: 1.5 + Math.random()*2.5,
+      vx: -1 + Math.random()*2,
+      rot: Math.random()*360,
+      vrot: -4 + Math.random()*8,
+      life: 0
+    });
+  }
+  requestAnimationFrame(animateConfetti);
+}
+function animateConfetti(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  let alive = false;
+  confettiPieces.forEach(p => {
+    p.y += p.vy; p.x += p.vx; p.rot += p.vrot; p.life++;
+    if(p.life < 260) alive = true;
+    ctx.save();
+    ctx.translate(p.x,p.y);
+    ctx.rotate(p.rot*Math.PI/180);
+    ctx.fillStyle = p.c;
+    ctx.globalAlpha = Math.max(0, 1 - p.life/260);
+    ctx.fillRect(-p.r/2,-p.r/2,p.r,p.r*0.6);
+    ctx.restore();
+  });
+  if(alive) requestAnimationFrame(animateConfetti);
+  else ctx.clearRect(0,0,canvas.width,canvas.height);
+}
+let confettiFired = false;
+const finalObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting && !confettiFired){
+      confettiFired = true;
+      launchConfetti();
+      finalObserver.disconnect();
+    }
+  });
+}, {threshold:0.4});
+finalObserver.observe(document.getElementById('final'));
+</script>
+</body>
+</html>
