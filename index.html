@@ -327,49 +327,372 @@ body.gift-opened #landing{
 /* =========================================================
    3. PERSONAL MESSAGE
 ========================================================= */
-#message .letter{
-  background:linear-gradient(180deg,#fff, var(--cream-deep));
-  border:1px solid rgba(201,151,63,.35);
-  border-radius:22px;
-  padding:clamp(28px,6vw,64px);
-  box-shadow:var(--shadow);
-  max-width:760px;
-  margin:0 auto;
-  position:relative;
+/* =========================================================
+   INTERACTIVE LETTER
+========================================================= */
+
+.letter-stage{
+   max-width:760px;
+   margin:0 auto;
+   position:relative;
 }
+
+
+/* INITIAL ENVELOPE SCREEN */
+
+.letter-intro{
+   min-height:480px;
+
+   display:flex;
+   flex-direction:column;
+   align-items:center;
+   justify-content:center;
+
+   text-align:center;
+
+   transition:
+      opacity .7s ease,
+      transform .9s cubic-bezier(.22,1,.36,1);
+}
+
+.letter-intro h3{
+   font-family:'Caveat',cursive;
+   font-size:clamp(2rem,5vw,3rem);
+
+   color:var(--maroon);
+   margin:25px 0 5px;
+}
+
+.letter-intro p{
+   opacity:.75;
+   margin-bottom:25px;
+}
+
+
+/* ENVELOPE */
+
+.envelope{
+   width:min(85vw, 600px);
+   height:clamp(300px, 48vw, 380px);
+
+   position:relative;
+   cursor:pointer;
+   transform-style:preserve-3d;
+
+
+   transition:
+      transform .8s cubic-bezier(.22,1,.36,1);
+}
+
+.envelope:hover{
+   transform:
+      translateY(-8px)
+      scale(1.03);
+}
+
+
+/* Back of envelope */
+
+.envelope-back{
+   position:absolute;
+   inset:0;
+
+   background:linear-gradient(
+      135deg,
+      #e8c68c,
+      #c9973f
+   );
+
+   border-radius:8px;
+
+   box-shadow:
+      0 20px 40px rgba(78,17,32,.2);
+}
+
+
+/* Paper slightly visible */
+
+.envelope-paper{
+   position:absolute;
+
+   width:82%;
+   height:130px;
+
+   left:9%;
+   bottom:12px;
+
+   display:flex;
+   align-items:center;
+   justify-content:center;
+
+   font-size:3rem;
+
+   background:#fffaf1;
+
+   border-radius:6px;
+
+   z-index:2;
+}
+
+
+/* Envelope flap */
+
+.envelope-flap{
+   position:absolute;
+
+   top:0;
+   left:0;
+
+   width:100%;
+   height:100%;
+
+   background:linear-gradient(
+      135deg,
+      #7a2035,
+      #9d4255
+   );
+
+   clip-path:polygon(
+      0 0,
+      100% 0,
+      50% 58%
+   );
+
+   transform-origin:top;
+
+   z-index:5;
+
+   transition:
+      transform 1s cubic-bezier(.22,1,.36,1);
+}
+
+
+/* Front envelope */
+
+.envelope-front{
+   position:absolute;
+   inset:0;
+
+   z-index:4;
+
+   background:linear-gradient(
+      145deg,
+      #f0d28c,
+      #d9a85b
+   );
+
+   clip-path:polygon(
+      0 100%,
+      0 18%,
+      50% 62%,
+      100% 18%,
+      100% 100%
+   );
+
+   border-radius:8px;
+}
+
+
+/* Wax seal */
+
+.wax-seal{
+   position:absolute;
+
+   left:50%;
+   top:47%;
+
+   transform:translate(-50%,-50%);
+
+   width:48px;
+   height:48px;
+
+   border-radius:50%;
+
+   display:flex;
+   align-items:center;
+   justify-content:center;
+
+   background:#7a2035;
+
+   color:white;
+
+   z-index:6;
+
+   box-shadow:
+      0 6px 14px rgba(0,0,0,.18);
+
+   transition:
+      opacity .5s ease,
+      transform .6s ease;
+}
+
+
+/* BUTTON */
+
+.open-letter-btn{
+   border:none;
+
+   padding:14px 28px;
+
+   border-radius:999px;
+
+   background:var(--maroon);
+
+   color:white;
+
+   font-family:inherit;
+
+   font-size:1rem;
+
+   cursor:pointer;
+
+   box-shadow:
+      0 10px 25px rgba(78,17,32,.25);
+
+   transition:
+      transform .3s ease,
+      box-shadow .3s ease;
+}
+
+.open-letter-btn:hover{
+   transform:translateY(-3px);
+}
+
+
+/* FULL LETTER INITIALLY HIDDEN */
+
+#fullLetter{
+   opacity:0;
+
+   transform:
+      translateY(80px)
+      scale(.96);
+
+   pointer-events:none;
+
+   max-height:0;
+
+   overflow:hidden;
+
+   transition:
+      opacity .8s ease,
+      transform 1s cubic-bezier(.22,1,.36,1),
+      max-height 1.2s ease;
+
+   background:linear-gradient(
+      180deg,
+      #fff,
+      var(--cream-deep)
+   );
+
+   border:1px solid rgba(201,151,63,.35);
+
+   border-radius:22px;
+
+   padding:0 clamp(28px,6vw,64px);
+
+   box-shadow:var(--shadow);
+
+   position:relative;
+}
+
+
+/* LETTER OPENED */
+
+#message.letter-opened #fullLetter{
+   opacity:1;
+
+   transform:
+      translateY(0)
+      scale(1);
+
+   pointer-events:auto;
+
+   max-height:1500px;
+
+   padding:clamp(28px,6vw,64px);
+}
+
+
+/* INTRO DISAPPEARS */
+
+#message.letter-opened .letter-intro{
+   opacity:0;
+
+   transform:
+      translateY(-40px)
+      scale(.9);
+
+   pointer-events:none;
+
+   position:absolute;
+
+   width:100%;
+}
+
+
+/* ENVELOPE OPENS */
+
+#message.letter-opened .envelope-flap{
+   transform:rotateX(180deg);
+}
+
+#message.letter-opened .wax-seal{
+   opacity:0;
+
+   transform:
+      translate(-50%,-50%)
+      scale(.3);
+}
+
+
+/* LETTER CONTENT */
+
 #message .letter::before{
-  content:"";
-  position:absolute;
-  top:18px;left:18px;right:18px;bottom:18px;
-  border:1px dashed rgba(122,32,53,.18);
-  border-radius:14px;
-  pointer-events:none;
+   content:"";
+
+   position:absolute;
+
+   top:18px;
+   left:18px;
+   right:18px;
+   bottom:18px;
+
+   border:1px dashed rgba(122,32,53,.18);
+
+   border-radius:14px;
+
+   pointer-events:none;
 }
+
 #message .letter h3{
-  font-family:'Caveat',cursive;
-  font-size:clamp(1.9rem,4vw,2.6rem);
-  color:var(--maroon);
-  margin-bottom:.6em;
+   font-family:'Caveat',cursive;
+
+   font-size:clamp(1.9rem,4vw,2.6rem);
+
+   color:var(--maroon);
+
+   margin-bottom:.6em;
 }
+
 #message p{
-  font-size:clamp(1rem,2vw,1.15rem);
-  line-height:1.9;
-  color:var(--ink);
-  margin:0 0 1em;
-  opacity:0;
+   font-size:clamp(1rem,2vw,1.15rem);
+
+   line-height:1.9;
+
+   color:var(--ink);
+
+   margin:0 0 1em;
 }
-#message p.revealed{
-  animation:fadeUp .9s ease forwards;
-}
-@keyframes fadeUp{
-  from{opacity:0;transform:translateY(14px);}
-  to{opacity:1;transform:translateY(0);}
-}
+
 #message .sign-off{
-  font-family:'Caveat',cursive;
-  font-size:1.6rem;
-  color:var(--maroon-deep);
-  margin-top:18px;
+   font-family:'Caveat',cursive;
+
+   font-size:1.6rem;
+
+   color:var(--maroon-deep);
+
+   margin-top:18px;
 }
 
 /* =========================================================
@@ -399,12 +722,152 @@ body.gift-opened #landing{
 }
 .timeline-item:last-child{padding-bottom:0;}
 .timeline-item .tl-card{
-  width:calc(50% - 46px);
-  opacity:0;
-  transform:translateY(30px);
-  transition:opacity .8s ease, transform .8s ease;
+   width:calc(50% - 46px);
+   opacity:0;
+   transform:translateY(30px);
+   cursor:pointer;
+   transition:opacity .8s ease, transform .8s ease;
 }
-.timeline-item.in-view .tl-card{opacity:1;transform:translateY(0);}
+
+.timeline-item.in-view .tl-card{
+   opacity:1;
+   transform:translateY(0);
+}
+
+/* =========================================================
+   TIMELINE PHOTO MYSTERY REVEAL
+========================================================= */
+
+.tl-photo-wrap{
+   position:relative;
+   width:100%;
+   aspect-ratio:4/3;
+   overflow:hidden;
+   background:var(--cream-deep);
+}
+
+/* Actual photo */
+.timeline-item .tl-img{
+   width:100%;
+   height:100%;
+   object-fit:cover;
+
+   transform:scale(1.18);
+   opacity:0;
+
+   transition:
+      transform 1.1s cubic-bezier(.22,1,.36,1),
+      opacity .7s ease;
+}
+
+/* Mystery cover */
+.tl-cover{
+   position:absolute;
+   inset:0;
+
+   display:flex;
+   align-items:center;
+   justify-content:center;
+
+   background:
+      radial-gradient(circle at 50% 40%,
+         rgba(239,217,164,.7),
+         rgba(122,32,53,.98) 70%);
+
+   z-index:3;
+   cursor:pointer;
+
+   transition:
+      transform .9s cubic-bezier(.22,1,.36,1),
+      opacity .7s ease;
+}
+
+/* Cover content */
+.tl-cover-content{
+   text-align:center;
+   color:#fff;
+
+   transition:
+      transform .5s ease,
+      opacity .4s ease;
+}
+
+/* Emoji */
+.tl-cover-emoji{
+   font-size:clamp(3rem,8vw,5rem);
+   margin-bottom:12px;
+
+   animation:giftFloat 2.2s ease-in-out infinite;
+}
+
+/* Tap text */
+.tl-cover-text{
+   font-family:'Caveat', cursive;
+   font-size:clamp(1.5rem,4vw,2rem);
+
+   color:var(--gold-light);
+}
+
+/* Sparkles */
+.tl-cover-sparkles{
+   margin-top:10px;
+   font-size:1.2rem;
+
+   animation:sparklePulse 1.8s ease-in-out infinite;
+}
+
+
+/* =========================================================
+   REVEAL ANIMATION
+========================================================= */
+
+/* Cover flies upward */
+.timeline-item.revealed .tl-cover{
+   opacity:0;
+   transform:translateY(-110%) rotate(-3deg);
+   pointer-events:none;
+}
+
+/* Photo appears with cinematic zoom */
+.timeline-item.revealed .tl-img{
+   opacity:1;
+   transform:scale(1);
+}
+
+/* Cover content disappears */
+.timeline-item.revealed .tl-cover-content{
+   opacity:0;
+   transform:scale(.7);
+}
+
+
+/* =========================================================
+   ANIMATIONS
+========================================================= */
+
+@keyframes giftFloat{
+   0%,100%{
+      transform:translateY(0) rotate(-4deg);
+   }
+
+   50%{
+      transform:translateY(-10px) rotate(4deg);
+   }
+}
+
+@keyframes sparklePulse{
+   0%,100%{
+      opacity:.5;
+      transform:scale(.9);
+   }
+
+   50%{
+      opacity:1;
+      transform:scale(1.15);
+   }
+}
+
+
 .timeline-item:nth-child(even){justify-content:flex-start;}
 .timeline-dot{
   position:absolute;
@@ -1037,6 +1500,217 @@ body.gift-opened #landing{
   z-index:2;
   pointer-events:none;
 }
+
+/* =========================================================
+   FLOATING STICKER BUBBLES
+========================================================= */
+
+#bubbleWorld{
+   position:fixed;
+   inset:0;
+   pointer-events:none;
+   z-index:20;
+   overflow:hidden;
+}
+
+
+/* Main bubble */
+
+.sticker-bubble{
+   position:absolute;
+
+   width:75px;
+   height:75px;
+
+   border-radius:50%;
+
+   display:flex;
+   align-items:center;
+   justify-content:center;
+
+   pointer-events:auto;
+   cursor:pointer;
+
+   background:
+      radial-gradient(
+         circle at 30% 25%,
+         rgba(255,255,255,.8),
+         rgba(255,255,255,.25) 35%,
+         rgba(255,255,255,.08) 70%
+      );
+
+   border:1px solid rgba(255,255,255,.55);
+
+   backdrop-filter:blur(3px);
+
+   box-shadow:
+      inset 5px 5px 10px rgba(255,255,255,.3),
+      inset -5px -5px 10px rgba(100,50,70,.08),
+      0 8px 20px rgba(78,17,32,.15);
+
+   animation:
+      bubbleFloat 8s linear forwards,
+      bubbleWobble 2.5s ease-in-out infinite;
+}
+
+
+/* Sticker inside bubble */
+
+.sticker-bubble img{
+   width:65%;
+   height:65%;
+
+   object-fit:contain;
+
+   pointer-events:none;
+
+   opacity:.75;
+}
+
+
+/* Bubble floating upward */
+
+@keyframes bubbleFloat{
+
+   0%{
+      transform:translateY(0) scale(.7);
+      opacity:0;
+   }
+
+   10%{
+      opacity:1;
+   }
+
+   90%{
+      opacity:1;
+   }
+
+   100%{
+      transform:translateY(-115vh) scale(1.05);
+      opacity:0;
+   }
+
+}
+
+
+/* Gentle side movement */
+
+@keyframes bubbleWobble{
+
+   0%,100%{
+      margin-left:0;
+   }
+
+   50%{
+      margin-left:25px;
+   }
+
+}
+
+
+/* POP effect */
+
+.sticker-bubble.popped{
+
+   animation:
+      bubblePop .45s ease forwards;
+
+   pointer-events:none;
+}
+
+
+@keyframes bubblePop{
+
+   0%{
+      transform:scale(1);
+      opacity:1;
+   }
+
+   40%{
+      transform:scale(1.35);
+   }
+
+   100%{
+      transform:scale(0);
+      opacity:0;
+   }
+
+}
+
+
+/* Sticker appears after bubble pops */
+
+/* Sticker appears exactly where the bubble was popped */
+
+.freed-sticker{
+   position:fixed;
+
+   width:120px;
+   height:120px;
+
+   object-fit:contain;
+
+   pointer-events:none;
+
+   z-index:30;
+
+   transform:translate(-50%,-50%);
+
+   animation:stickerAppear 2.5s ease forwards;
+}
+
+
+@keyframes stickerAppear{
+
+   0%{
+      transform:
+         translate(-50%,-50%)
+         scale(.2)
+         rotate(-10deg);
+
+      opacity:0;
+   }
+
+   20%{
+      transform:
+         translate(-50%,-50%)
+         scale(1.2)
+         rotate(5deg);
+
+      opacity:1;
+   }
+
+   35%{
+      transform:
+         translate(-50%,-50%)
+         scale(1)
+         rotate(0deg);
+
+      opacity:1;
+   }
+
+   /* Sticker stays briefly after pop */
+   50%{
+      transform:
+         translate(-50%,-50%)
+         translateY(0)
+         scale(1);
+
+      opacity:1;
+   }
+
+   /* Then flies upward */
+   100%{
+      transform:
+         translate(-50%,-50%)
+         translateY(-220px)
+         scale(.8)
+         rotate(12deg);
+
+      opacity:0;
+   }
+
+}
 </style>
 </head>
 <body>
@@ -1089,13 +1763,54 @@ body.gift-opened #landing{
 <div id="site">
 
   <!-- 2. PERSONAL MESSAGE -->
-  <section class="section" id="message">
-    <div class="letter">
-      <h3 class="script">Dear Sister ❤️</h3>
-      <div id="letterText"></div>
-      <p class="sign-off">— Your Brother</p>
+ <section class="section" id="message">
+
+  <div class="letter-stage">
+
+    <!-- Envelope shown first -->
+    <div class="letter-intro" id="letterIntro">
+
+      <div class="envelope" id="openLetter">
+
+        <div class="envelope-back"></div>
+
+        <div class="envelope-paper">
+          💌
+        </div>
+
+        <div class="envelope-flap"></div>
+
+        <div class="envelope-front"></div>
+
+        <div class="wax-seal">❤️</div>
+
+      </div>
+
+      <h3>A Letter For You</h3>
+
+      <p>Some words are meant to be opened slowly...</p>
+
+      <button class="open-letter-btn" id="openLetterBtn">
+        Open My Letter 💌
+      </button>
+
     </div>
-  </section>
+
+
+    <!-- Hidden letter -->
+    <div class="letter" id="fullLetter">
+
+      <h3 class="script">Dear Sister ❤️</h3>
+
+      <div id="letterText"></div>
+
+      <p class="sign-off">— baauji</p>
+
+    </div>
+
+  </div>
+
+</section>
 
   <div class="thread-divider" aria-hidden="true">
     <svg viewBox="0 0 220 20"><path d="M0,10 Q55,-4 110,10 T220,10" stroke="#C9973F" stroke-width="1.4" fill="none"/></svg>
@@ -1561,6 +2276,11 @@ body.gift-opened #landing{
 
 <canvas id="confetti-canvas" aria-hidden="true"></canvas>
 
+<canvas id="confetti-canvas" aria-hidden="true"></canvas>
+
+<!-- Floating Sticker Bubble Layer -->
+<div id="bubbleWorld" aria-hidden="true"></div>
+
 <script>
 /* =========================================================
    ⭐ EASY PERSONALIZATION — EDIT THIS SECTION ONLY ⭐
@@ -1639,13 +2359,43 @@ memories.forEach((m,i) => {
   item.innerHTML = `
     <span class="timeline-dot" aria-hidden="true"></span>
     <div class="tl-card">
-      <img class="tl-img" src="${m.img || placeholderSrc('Timeline photo ' + (i+1))}" alt="${m.caption}">
-      <div class="tl-body">
+  <div class="tl-photo-wrap">
+    
+    <img class="tl-img"
+         src="${m.img || placeholderSrc('Timeline photo ' + (i+1))}"
+         alt="${m.caption}">
+
+    <div class="tl-cover">
+      <div class="tl-cover-content">
+        <div class="tl-cover-emoji">🎁</div>
+        <div class="tl-cover-text">Tap to reveal</div>
+        <div class="tl-cover-sparkles">✨ 💖 ✨</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="tl-body">
         <span class="tl-date">${m.date}</span>
         <p class="tl-caption">${m.caption}</p>
       </div>
     </div>`;
   timelineList.appendChild(item);
+});
+
+// Timeline touch / click reveal
+
+document.querySelectorAll('.tl-cover').forEach(cover => {
+
+  cover.addEventListener('click', function() {
+
+    const timelineItem =
+      this.closest('.timeline-item');
+
+    timelineItem.classList.add('revealed');
+
+  });
+
 });
 
 // ---------------------------------------------------------
@@ -1842,12 +2592,57 @@ playCurrentSong();
   document.body.classList.add('gift-opened');
   siteEl.classList.add('revealed');
   startAmbient();
-  // reveal letter paragraphs with staggered fade
-  document.querySelectorAll('#letterText p').forEach((p,i) => {
-    setTimeout(() => p.classList.add('revealed'), 400 + i*550);
-  });
   setTimeout(() => siteEl.scrollIntoView({behavior:'smooth'}), 250);
 });
+
+  // reveal letter paragraphs with staggered fade
+  const messageSection =
+  document.getElementById('message');
+
+const openLetterBtn =
+  document.getElementById('openLetterBtn');
+
+const envelope =
+  document.getElementById('openLetter');
+
+
+function openTheLetter(){
+
+  messageSection.classList.add('letter-opened');
+
+  setTimeout(() => {
+
+    document
+      .querySelectorAll('#letterText p')
+      .forEach((p,i) => {
+
+        setTimeout(() => {
+
+          p.classList.add('revealed');
+
+        }, 250 + i * 500);
+
+      });
+
+  }, 850);
+
+}
+
+
+/* Open with button */
+
+openLetterBtn.addEventListener(
+  'click',
+  openTheLetter
+);
+
+
+/* Open by clicking envelope */
+
+envelope.addEventListener(
+  'click',
+  openTheLetter
+);
 
 musicBtn.addEventListener('click', () => {
 
@@ -2036,6 +2831,226 @@ const finalObserver = new IntersectionObserver((entries) => {
   });
 }, {threshold:0.4});
 finalObserver.observe(document.getElementById('final'));
+
+/* =========================================================
+   FLOATING STICKER BUBBLES
+========================================================= */
+
+const bubbleWorld =
+   document.getElementById('bubbleWorld');
+
+
+const stickerImages = [
+
+   'stickers/1.jpg',
+   'stickers/2.jpg',
+   'stickers/3.jpg',
+   'stickers/4.jpg',
+   'stickers/5.jpg',
+   'stickers/6.jpg',
+   'stickers/7.jpg',
+   'stickers/8.jpg',
+   'stickers/9.jpg',
+   'stickers/10.jpg',
+   'stickers/11.jpg',
+   'stickers/12.jpg',
+   'stickers/13.jpg'
+
+];
+
+
+let activeBubbles = 0;
+
+const MAX_BUBBLES = 4;
+
+
+function createStickerBubble(){
+
+   /* Do not create too many bubbles */
+
+   if(activeBubbles >= MAX_BUBBLES){
+      return;
+   }
+
+
+   const bubble =
+      document.createElement('div');
+
+   bubble.className =
+      'sticker-bubble';
+
+
+   /* Choose random sticker */
+
+   const randomSticker =
+      stickerImages[
+         Math.floor(
+            Math.random() *
+            stickerImages.length
+         )
+      ];
+
+
+   const img =
+      document.createElement('img');
+
+   img.src = randomSticker;
+
+   bubble.appendChild(img);
+
+
+   /* Random horizontal position */
+
+   const randomLeft =
+      Math.random() * 85 + 5;
+
+   bubble.style.left =
+      randomLeft + 'vw';
+
+
+   /* Start below screen */
+
+   bubble.style.bottom =
+      '-100px';
+
+
+   /* Random size */
+
+   const size =
+      55 + Math.random() * 45;
+
+   bubble.style.width =
+      size + 'px';
+
+   bubble.style.height =
+      size + 'px';
+
+
+   bubbleWorld.appendChild(bubble);
+
+   activeBubbles++;
+
+
+   /* POP WHEN CLICKED */
+
+   bubble.addEventListener(
+      'click',
+      function(){
+
+         popBubble(
+            bubble,
+            randomSticker
+         );
+
+      }
+   );
+
+
+   /* Remove if it reaches top */
+
+   bubble.addEventListener(
+      'animationend',
+      function(event){
+
+         if(
+            event.animationName ===
+            'bubbleFloat'
+         ){
+
+            if(bubble.parentNode){
+
+               bubble.remove();
+
+               activeBubbles--;
+
+            }
+
+         }
+
+      }
+   );
+
+}
+
+
+function popBubble(
+   bubble,
+   stickerImage
+){
+
+   if(
+      bubble.classList.contains('popped')
+   ){
+      return;
+   }
+
+
+   const rect =
+      bubble.getBoundingClientRect();
+
+
+   bubble.classList.add('popped');
+
+
+   /* Create free floating sticker */
+
+   const sticker =
+      document.createElement('img');
+
+   sticker.src =
+      stickerImage;
+
+   sticker.className =
+      'freed-sticker';
+
+
+   sticker.style.left =
+   (rect.left + rect.width / 2) +
+   'px';
+
+sticker.style.top =
+   (rect.top + rect.height / 2) +
+   'px';
+
+
+   document.body.appendChild(
+      sticker
+   );
+
+
+   setTimeout(() => {
+
+      sticker.remove();
+
+   }, 2600);
+
+
+   setTimeout(() => {
+
+      if(bubble.parentNode){
+
+         bubble.remove();
+
+         activeBubbles--;
+
+      }
+
+   }, 450);
+
+}
+
+
+/* Create bubbles gradually */
+
+setInterval(() => {
+
+   createStickerBubble();
+
+}, 2500);
+
+
 </script>
+
+<!-- Floating Sticker Bubble Layer -->
 </body>
 </html>
