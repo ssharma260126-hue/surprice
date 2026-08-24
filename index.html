@@ -527,6 +527,53 @@ body.gift-opened #landing{
 }
 
 
+
+/* Decorative envelope scribbles */
+.envelope-scribble{
+    position:absolute;
+    z-index:7;
+    pointer-events:none;
+    color:rgba(122, 32, 53, 0.22);
+    font-family:'Caveat', cursive;
+    line-height:1;
+}
+
+.scribble-1{
+    left:12%;
+    bottom:22%;
+    font-size:2.2rem;
+    transform:rotate(-15deg);
+}
+
+.scribble-2{
+    left:28%;
+    bottom:12%;
+    font-size:1.8rem;
+    transform:rotate(10deg);
+}
+
+.scribble-3{
+    right:14%;
+    bottom:22%;
+    font-size:2.1rem;
+    transform:rotate(15deg);
+}
+
+.scribble-4{
+    right:30%;
+    bottom:12%;
+    font-size:1.6rem;
+    transform:rotate(-10deg);
+}
+
+.scribble-5{
+    left:45%;
+    bottom:28%;
+    font-size:1.5rem;
+}
+
+
+
 /* BUTTON */
 
 .open-letter-btn{
@@ -2042,6 +2089,12 @@ z-index:1000;
           💌
         </div>
 
+        <div class="envelope-scribble scribble-1">✿</div>
+<div class="envelope-scribble scribble-2">♡</div>
+<div class="envelope-scribble scribble-3">❀</div>
+<div class="envelope-scribble scribble-4">✦</div>
+<div class="envelope-scribble scribble-5">♡</div>
+
         <div class="envelope-flap"></div>
 
         <div class="envelope-front"></div>
@@ -3491,9 +3544,9 @@ setTimeout(() => {
 
   const FRAME_COLORS = ['#f5efe3', '#e8b75e', '#3f7d7d', '#e39a92', '#f3d38a', '#efe9de'];
 
-  const STAGGER_MS     = 26;     // base gap between each photo's entrance
-  const STAGGER_JITTER = 150;    // extra random delay per photo
-  const HOLD_MS        = 900;    // pause once the collage has fully gathered
+  const STAGGER_MS     = 210;     // base gap between each photo's entrance
+  const STAGGER_JITTER = 300;    // extra random delay per photo
+  const HOLD_MS        = 1200;    // pause once the collage has fully gathered
 
   /* =========================================================
      SETUP
@@ -3578,7 +3631,7 @@ setTimeout(() => {
       const endScale    = isHero ? 1.18 : rand(0.9, 1.08);
 
       const delay    = i * STAGGER_MS + rand(0, STAGGER_JITTER);
-      const duration = rand(1100, 1750);
+      const duration = rand(3500, 4500);
 
       const el = document.createElement('div');
       el.className = 'photo';
