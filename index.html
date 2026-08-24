@@ -1553,6 +1553,17 @@ body.gift-opened #landing{
       bubbleWobble 2.5s ease-in-out infinite;
 }
 
+.sticker-bubble.escape-bubble{
+    border:2px solid rgba(255,255,255,.8);
+
+    box-shadow:
+       0 0 0 4px rgba(201,151,63,.18),
+       0 8px 25px rgba(122,32,53,.3);
+
+    transition:
+       left .10s ease-out,
+       bottom .10s ease-out;
+}
 
 /* Sticker inside bubble */
 
@@ -2872,6 +2883,124 @@ let activeBubbles = 0;
 
 const MAX_BUBBLES = 4;
 
+function createEscapeBubble(){
+
+   const bubble =
+      document.createElement('div');
+
+   bubble.className =
+      'sticker-bubble escape-bubble';
+
+
+   const escapeSticker =
+      stickerImages[
+         Math.floor(
+            Math.random() *
+            stickerImages.length
+         )
+      ];
+
+
+   const img =
+      document.createElement('img');
+
+   img.src = escapeSticker;
+
+   bubble.appendChild(img);
+
+
+   /* Starting position */
+
+   bubble.style.left =
+      (Math.random() * 75 + 10) + 'vw';
+
+   bubble.style.bottom =
+      '-100px';
+
+
+   bubble.style.width =
+      '85px';
+
+   bubble.style.height =
+      '85px';
+
+
+   bubbleWorld.appendChild(bubble);
+
+
+   /* ESCAPE WHEN SHE TRIES TO CLICK */
+
+   bubble.addEventListener(
+      'pointerdown',
+      function(event){
+
+         event.preventDefault();
+
+         const rect =
+            bubble.getBoundingClientRect();
+
+
+         const moveX =
+            (Math.random() * 10) - 10;
+
+         const moveY =
+            (Math.random() * 10) - 10;
+
+
+         let newLeft =
+            rect.left + moveX;
+
+         let newTop =
+            rect.top + moveY;
+
+
+         /* Keep inside screen */
+
+         newLeft =
+            Math.max(
+               20,
+               Math.min(
+                  window.innerWidth - rect.width - 20,
+                  newLeft
+               )
+            );
+
+         newTop =
+            Math.max(
+               20,
+               Math.min(
+                  window.innerHeight - rect.height - 20,
+                  newTop
+               )
+            );
+
+
+         /* Pause upward movement */
+
+        
+
+
+         /* Jump to random position */
+
+         bubble.style.left =
+            newLeft + 'px';
+
+         bubble.style.top =
+            newTop + 'px';
+
+         bubble.style.bottom =
+            'auto';
+
+
+         /* Continue upward */
+
+        
+
+      }
+   );
+
+}
+
 
 function createStickerBubble(){
 
@@ -3056,6 +3185,12 @@ setInterval(() => {
    createStickerBubble();
 
 }, 2500);
+
+setTimeout(() => {
+
+   createEscapeBubble();
+
+}, 5000);
 
 
 </script>
