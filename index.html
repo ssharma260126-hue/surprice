@@ -2084,6 +2084,66 @@ z-index:1000;
 
 }
 
+.gift-finder-text{
+    position: fixed;
+    left: 25px;
+    bottom: 25px;
+
+    z-index: 50;
+
+    padding: 6px 11px;
+
+    background: rgba(255, 248, 235, 0.92);
+
+    border: 2px solid #742131;
+    border-radius: 14px;
+
+    box-shadow:
+        0 6px 20px rgba(116, 33, 49, 0.18);
+
+    font-size: clamp(12px, 1.3vw, 15px);
+    font-weight: 600;
+
+    color: #742131;
+
+    pointer-events: none;
+
+    animation:
+        giftTextCycle
+        12s
+        infinite;
+}
+
+
+@keyframes giftTextCycle{
+
+    0%{
+        opacity: 0;
+        transform: translateY(15px);
+    }
+
+    8%{
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    33%{
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    41%{
+        opacity: 0;
+        transform: translateY(15px);
+    }
+
+    100%{
+        opacity: 0;
+        transform: translateY(15px);
+    }
+
+}
+
 </style>
 </head>
 <body>
@@ -2680,6 +2740,10 @@ z-index:1000;
 <canvas id="confetti-canvas" aria-hidden="true"></canvas>
 
 <canvas id="confetti-canvas" aria-hidden="true"></canvas>
+
+<div class="gift-finder-text">
+    🎁 Can You Find Your Gift Box? 👀
+</div>
 
 <!-- Floating Sticker Bubble Layer -->
 <div id="bubbleWorld" aria-hidden="true"></div>
