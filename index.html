@@ -2022,6 +2022,68 @@ z-index:1000;
   transform:scale(.96);
 }
 
+.emoji-water-drop{
+   position: fixed;
+   z-index: 99999;
+   pointer-events: none;
+   font-size: 22px;
+
+   transform:
+      translate(-50%, -50%)
+      scale(0.5);
+
+   animation:
+      emojiWaterBlast
+      0.9s
+      cubic-bezier(
+         0.2,
+         0.8,
+         0.2,
+         1
+      )
+      forwards;
+}
+
+
+@keyframes emojiWaterBlast{
+
+   0%{
+      opacity: 1;
+
+      transform:
+         translate(
+            -50%,
+            -50%
+         )
+         scale(0.3);
+   }
+
+
+   60%{
+      opacity: 1;
+
+      transform:
+         translate(
+            calc(-50% + var(--move-x)),
+            calc(-50% + var(--move-y))
+         )
+         scale(1.2);
+   }
+
+
+   100%{
+      opacity: 0;
+
+      transform:
+         translate(
+            calc(-50% + var(--move-x)),
+            calc(-50% + var(--move-y) + 40px)
+         )
+         scale(0.5);
+   }
+
+}
+
 </style>
 </head>
 <body>
@@ -3215,12 +3277,23 @@ const MAX_BUBBLES = 4;
 
 function createEscapeBubble(){
 
+  let escapeTimer;
+
+   /* Only one irritating bubble at a time */
+
+   if(document.querySelector('.escape-bubble')){
+      return;
+   }
+
+
    const bubble =
       document.createElement('div');
 
    bubble.className =
       'sticker-bubble escape-bubble';
 
+
+   /* Choose random sticker */
 
    const escapeSticker =
       stickerImages[
@@ -3247,7 +3320,6 @@ function createEscapeBubble(){
    bubble.style.bottom =
       '-100px';
 
-
    bubble.style.width =
       '85px';
 
@@ -3255,10 +3327,14 @@ function createEscapeBubble(){
       '85px';
 
 
+   /* Add bubble to screen */
+
    bubbleWorld.appendChild(bubble);
 
 
-   /* ESCAPE WHEN SHE TRIES TO CLICK */
+   /* WHEN TOUCHED — MOVE ONLY LEFT OR RIGHT */
+
+   
 
    bubble.addEventListener(
       'pointerdown',
@@ -3266,68 +3342,223 @@ function createEscapeBubble(){
 
          event.preventDefault();
 
+
          const rect =
             bubble.getBoundingClientRect();
 
-
-         const moveX =
-            (Math.random() * 10) - 10;
-
-         const moveY =
-            (Math.random() * 10) - 10;
+            bubble.style.animationPlayState = 'paused';
 
 
-         let newLeft =
-            rect.left + moveX;
+        const angle =
+   Math.random() * Math.PI * 2;
 
-         let newTop =
-            rect.top + moveY;
+const distance =
+   100 + Math.random() * 60;
+
+let moveX =
+   Math.cos(angle) * distance;
+
+let moveY =
+   Math.sin(angle) * distance;
+
+let newLeft =
+   rect.left + moveX;
+
+let newTop =
+   rect.top + moveY;
 
 
          /* Keep inside screen */
 
          newLeft =
             Math.max(
-               20,
+               10,
                Math.min(
-                  window.innerWidth - rect.width - 20,
+                  window.innerWidth -
+                  rect.width -
+                  10,
                   newLeft
                )
             );
 
-         newTop =
-            Math.max(
-               20,
-               Math.min(
-                  window.innerHeight - rect.height - 20,
-                  newTop
-               )
-            );
+            
 
 
-         /* Pause upward movement */
+         /* Move only horizontally */
 
-        
-
-
-         /* Jump to random position */
+         bubble.style.transition =
+   'left 0.12s ease-out';
 
          bubble.style.left =
-            newLeft + 'px';
+   newLeft + 'px';
 
-         bubble.style.top =
-            newTop + 'px';
+   clearTimeout(escapeTimer);
 
-         bubble.style.bottom =
-            'auto';
+escapeTimer = setTimeout(() => {
 
+   waterEmojiBlast(
+      bubble
+   );
 
-         /* Continue upward */
-
-        
+}, 3000);
 
       }
    );
+
+
+   /* Remove after it reaches the top */
+
+   bubble.addEventListener(
+      'animationend',
+      function(event){
+
+         if(
+            event.animationName ===
+            'bubbleFloat'
+         ){
+
+            bubble.remove();
+
+         }
+
+      }
+   );
+
+}
+
+function waterEmojiBlast(bubble){
+
+   const rect =
+      bubble.getBoundingClientRect();
+
+
+   /* Stop bubble animation */
+
+   bubble.style.animation = 'none';
+
+
+   /* Make the original bubble disappear */
+
+   bubble.style.transform =
+      'scale(1.35)';
+
+   bubble.style.opacity =
+      '0';
+
+
+   /* Create multiple emoji drops */
+
+   const totalDrops = 100;
+
+
+   for(
+      let i = 0;
+      i < totalDrops;
+      i++
+   ){
+
+      const drop =
+         document.createElement('div');
+
+
+      drop.className =
+         'emoji-water-drop';
+
+
+      /* Random emoji */
+
+      const emojis = [
+         '🤗',
+         '😊',
+         '😎',
+         '😁'
+      ];
+
+
+      drop.textContent =
+         emojis[
+            Math.floor(
+               Math.random() *
+               emojis.length
+            )
+         ];
+
+
+      /* Start from bubble center */
+
+      drop.style.left =
+         (
+            rect.left +
+            rect.width / 2
+         ) + 'px';
+
+
+      drop.style.top =
+         (
+            rect.top +
+            rect.height / 2
+         ) + 'px';
+
+
+      /* Random direction */
+
+      const angle =
+         Math.random() *
+         Math.PI * 2;
+
+
+      const distance =
+         50 +
+         Math.random() * 120;
+
+
+      const moveX =
+         Math.cos(angle) *
+         distance;
+
+
+      const moveY =
+         Math.sin(angle) *
+         distance;
+
+
+      /* Send movement values to CSS */
+
+      drop.style.setProperty(
+         '--move-x',
+         moveX + 'px'
+      );
+
+
+      drop.style.setProperty(
+         '--move-y',
+         moveY + 'px'
+      );
+
+
+      document.body.appendChild(
+         drop
+      );
+
+
+      /* Remove after animation */
+
+      setTimeout(() => {
+
+         drop.remove();
+
+      }, 900);
+
+   }
+
+
+   /* Remove original bubble */
+
+   setTimeout(() => {
+
+      bubble.remove();
+
+   }, 300);
 
 }
 
@@ -3516,11 +3747,11 @@ setInterval(() => {
 
 }, 2500);
 
-setTimeout(() => {
+setInterval(() => {
 
-   createEscapeBubble();
+    createEscapeBubble();
 
-}, 5000);
+}, 8000);
 
 
 
