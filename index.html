@@ -1600,17 +1600,7 @@ body.gift-opened #landing{
       bubbleWobble 2.5s ease-in-out infinite;
 }
 
-.sticker-bubble.escape-bubble{
-    border:2px solid rgba(255,255,255,.8);
 
-    box-shadow:
-       0 0 0 4px rgba(201,151,63,.18),
-       0 8px 25px rgba(122,32,53,.3);
-
-    transition:
-       left .10s ease-out,
-       bottom .10s ease-out;
-}
 
 /* Sticker inside bubble */
 
@@ -2742,7 +2732,7 @@ z-index:1000;
 <canvas id="confetti-canvas" aria-hidden="true"></canvas>
 
 <div class="gift-finder-text">
-    🎁 Can You Find Your Gift Box? 👀
+    🫧 Pop the Right Bubble? 👀
 </div>
 
 <!-- Floating Sticker Bubble Layer -->
@@ -3900,7 +3890,7 @@ setInterval(() => {
 
     const cx = W / 2, cy = H / 2;
     const radiusX = W * 0.30;
-    const radiusY = H * 0.24;
+    const radiusY = H * 0.28;
 
     for (let i = 0; i < PHOTO_COUNT; i++){
       const isHero = i === heroIndex;
@@ -3943,7 +3933,7 @@ setInterval(() => {
       const endScale    = isHero ? 1.18 : rand(0.9, 1.08);
 
       const delay    = i * STAGGER_MS + rand(0, STAGGER_JITTER);
-      const duration = rand(3500, 4500);
+      const duration = rand(5000, 6500);
 
       const el = document.createElement('div');
       el.className = 'photo';
@@ -4102,6 +4092,6 @@ montageReplayBtn.addEventListener('click', replayMontage);
 
 </script>
 
-<!-- Floating Sticker Bubble Layer -->
+
 </body>
 </html>
