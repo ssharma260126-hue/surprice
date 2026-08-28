@@ -141,6 +141,8 @@ a:focus-visible, button:focus-visible{
     z-index: 100000;
 
     transition: transform .3s ease, box-shadow .3s ease;
+    opacity:0;
+pointer-events:none;
 }
 
 #musicBtn:hover {
@@ -165,6 +167,37 @@ a:focus-visible, button:focus-visible{
         box-shadow: 0 10px 35px rgba(201,151,63,.7);
     }
 }
+
+#musicHint{
+  position:fixed;
+  right:80px;
+  bottom:32px;
+
+  font-family:'Caveat', cursive;
+  font-size:1.35rem;
+  color:var(--maroon);
+
+  z-index:9999;
+  white-space:nowrap;
+
+  animation:musicHintFloat 1.5s ease-in-out infinite;
+}
+
+#musicHint span{
+  color:var(--maroon-deep);
+  font-weight:bold;
+}
+
+@keyframes musicHintFloat{
+  0%,100%{
+    transform:translateX(0);
+  }
+
+  50%{
+    transform:translateX(-6px);
+  }
+}
+
 .btn{
   border:none;
   border-radius:999px;
@@ -1420,6 +1453,8 @@ body.gift-opened #landing{
   box-shadow:0 10px 26px -16px rgba(78,17,32,.28);
   transition:transform .4s ease, box-shadow .4s ease;
   position:relative;
+  overflow:hidden; /* ADD HERE */
+  cursor:pointer; /* ADD HERE */
   opacity:0;
   transform:translateY(24px);
 }
@@ -1432,6 +1467,60 @@ body.gift-opened #landing{
   font-weight:600;
   display:block;
   margin-bottom:8px;
+}
+
+.funny-card.revealed{
+  cursor:default;
+}
+
+.funny-cover{
+  position:absolute;
+  inset:0;
+  z-index:5;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:20px;
+  background:
+    radial-gradient(circle at 50% 25%, rgba(239,217,164,.42), transparent 45%),
+    linear-gradient(135deg, var(--maroon), var(--maroon-deep));
+  color:var(--gold-light);
+  transition:
+    transform .75s cubic-bezier(.22,1,.36,1),
+    opacity .5s ease;
+}
+
+.funny-cover::before{
+  content:"";
+  position:absolute;
+  inset:9px;
+  border:1px dashed rgba(239,217,164,.45);
+  border-radius:12px;
+}
+
+.funny-cover-content{
+  position:relative;
+  z-index:1;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:8px;
+}
+
+.funny-cover-icon{
+  font-size:2rem;
+}
+
+.funny-cover-text{
+  font-family:'Caveat',cursive;
+  font-size:1.45rem;
+}
+
+.funny-card.revealed .funny-cover{
+  opacity:0;
+  transform:translateY(-105%);
+  pointer-events:none;
 }
 
 /* =========================================================
@@ -2140,9 +2229,15 @@ z-index:1000;
 
    <audio id="bgMusic"></audio>
 
+   <div id="musicHint">
+  Be ready for your <span>Surprice</span> 🤗
+</div>
+
 <button id="musicBtn" aria-label="Play or pause music" title="Music">
     🎵
 </button>
+
+
 
 
 <!-- =========================================================
@@ -2929,10 +3024,29 @@ const funnyLines = [
   "Still be the person I would defend against anyone.🫶"
 ];
 const funnyGrid = document.getElementById('funnyGrid');
+
 funnyLines.forEach((line,i) => {
   const card = document.createElement('div');
+
   card.className = 'funny-card';
-  card.innerHTML = `<span class="funny-num">0${i+1}</span>${line}`;
+
+  card.innerHTML = `
+    <span class="funny-num">0${i+1}</span>
+    <span class="funny-line">${line}</span>
+
+    <div class="funny-cover">
+      <div class="funny-cover-content">
+  <div class="funny-cover-text">
+    ${String(i + 1).padStart(2, '0')} ${['💕','🪢','🧿','😎','❤️','🫶'][i]}
+  </div>
+</div>
+    </div>
+  `;
+
+  card.addEventListener('click', () => {
+    card.classList.add('revealed');
+  });
+
   funnyGrid.appendChild(card);
 });
 
@@ -3047,6 +3161,11 @@ openGiftBtn.addEventListener('click', () => {
 
    shufflePlaylist();
 playCurrentSong();
+
+musicBtn.style.opacity = '1';
+musicBtn.style.pointerEvents = 'auto';
+
+document.getElementById('musicHint').style.display = 'none';
 
   const rect = openGiftBtn.getBoundingClientRect();
   burst(rect.left + rect.width/2, rect.top + rect.height/2, 34);
